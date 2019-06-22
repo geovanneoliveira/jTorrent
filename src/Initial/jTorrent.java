@@ -7,7 +7,10 @@ import common.ListenerTorrent;
 import server.JJorgeServer;
 import server.Server;
 
+import java.io.File;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class jTorrent {
 
@@ -23,15 +26,25 @@ public class jTorrent {
     System.out.print("Digite uma String: ");
     String arquivo = leitor.nextLine();
     System.out.println(arquivo);
+    
+    try {
+        JFileChooser abrirTorrent = new JFileChooser();
+        abrirTorrent.showOpenDialog(null);
+        
+        File file = abrirTorrent.getSelectedFile();
+        
+        System.out.println("Arquivo selecionado: "+file.getPath());
+        
+        //Passa o caminho do .torrent para o cliente
+        client.searchMachines(file.getPath());
 
-    /* *
-     * Como só tem uma opção pula pra busca
-     *
-     * caso contrario aqui entraria um if/switch
-     * */
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        System.out.println(ex.getMessage());
+    }
 
-    //Passa o .torrent para o cliente. (como não tem, vai a string)
-    client.searchMachines(arquivo);
+
+    
 
   }
 

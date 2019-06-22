@@ -11,6 +11,7 @@ public class Client {
     //Singleton
     private static Client instance;
     private JJorgeClient jJorgeClient;
+    private TorrentFile torrentFile;
 
     public static synchronized Client getInstance() {
         return (instance == null) ? instance = new Client() : instance;
@@ -32,9 +33,13 @@ public class Client {
         jJorgeClient.send(obj);
     }
 
-    public void searchMachines(String arquivo) {
-
-        TransmissionObject obj = arquivoParaObjeto(arquivo);
+    public void searchMachines(String filePath) {
+    	
+    	this.torrentFile = new TorrentFile(filePath);
+    	
+    	String name = this.torrentFile.getNameTorrent();
+    	
+        TransmissionObject obj = arquivoParaObjeto(name);
 
         this.jJorgeClient.discoverMachines(obj);
     }
