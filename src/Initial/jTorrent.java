@@ -1,15 +1,10 @@
 package Initial;
 
 import client.Client;
-import client.JJorgeClient;
-import client.TorrentFile;
-import common.ListenJJorge;
-import common.ListenerTorrent;
-import server.JJorgeServer;
+import client.TorrentMaker;
 import server.Server;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -19,7 +14,7 @@ public class jTorrent {
   public static void main(String args[]){
 
     //Inicializando Operadores
-    Client client = Client.getInstance();
+    
     Server server = Server.getInstance();
 
     try {
@@ -62,6 +57,10 @@ public class jTorrent {
     abrirTorrent.showOpenDialog(null);
     File file = abrirTorrent.getSelectedFile();
     System.out.println("Arquivo selecionado para download: "+file.getPath());
+    
+    Client client = Client.getInstance();
+    
+    client.searchMachines(file.getPath());
   }
   
   public static void makeTorrent() {
@@ -71,8 +70,8 @@ public class jTorrent {
     System.out.println("Arquivo selecionado para gerar torrent: "+file.getPath()+"\n");
     
     //int size = selectSizeOfPeca();  ta dando erro nessa função, resolver depois, n é urgente
-    
-    
+    System.out.println("tamanho do arquivo: "+file.length());
+    //TorrentMaker torrentMaker = new TorrentMaker(file.getPath());
   }
   
 	public static int selectSizeOfPeca() {
