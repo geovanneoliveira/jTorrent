@@ -35,7 +35,7 @@ public class jTorrent {
 //        File file = abrirTorrent.getSelectedFile();
 //        System.out.println("Arquivo selecionado: "+file.getPath());
         
-        TorrentFile f = new TorrentFile("/home/brenno/Documentos/vingadores.torrent");
+        TorrentFile f = new TorrentFile("/home/brenno/Documentos/toyStory.torrent");
         
         ArrayList<Integer> parts = server.findOrNullParts(f.getNameTorrent());
         
