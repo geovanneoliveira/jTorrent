@@ -5,6 +5,7 @@ import common.ListenerTorrent;
 import common.TransmissionObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Client {
 
@@ -73,15 +74,24 @@ public class Client {
        serverParts.containsAll(); <- vide os paramentros necessarios
        */
 
-       int total = torrentFile.getTotal();
-       initArrayAvaliablePecas(total);
+        int total = torrentFile.getTotal();
+        initArrayAvaliablePecas(total);
 
-//       int range = total / 100;
-//       //FIXME TODO
-//       for();
-//       this.avaliablePecas.get(count);
-//
-//       serverParts.containsAll();
+        int range = total / 100;
+        System.out.println(total);
+        ArrayList<Integer> collection = new ArrayList<>();
+
+        for(int i = (count * range); i < (range + range); i++) {
+
+           collection.add(this.avaliablePecas.get(i));
+        }
+
+       if(serverParts.containsAll(collection)) {
+
+           for (int i : collection) {
+               System.out.println(">>: " + i);
+           }
+       }
 
 
         return res;

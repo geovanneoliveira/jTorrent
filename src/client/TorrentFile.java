@@ -41,7 +41,8 @@ public class TorrentFile {
 		int res = 0;
 
 		try {
-			this.torrentReader.seek(1);
+			this.torrentReader.seek(0);
+			this.torrentReader.readLine();
 			res = Integer.parseInt(this.torrentReader.readLine());
 		}
 		catch (Exception e){
