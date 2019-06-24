@@ -7,7 +7,9 @@ import common.TransmissionObject;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -34,7 +36,6 @@ public class Server {
      * */
 
     public void send(TransmissionObject obj) {
-
         jJorgeServer.send(obj);
     }
 
@@ -43,27 +44,23 @@ public class Server {
         ArrayList<Integer> res = null;
         String linha = null;
 
-        try
-        {
-            BufferedReader br = new BufferedReader(new FileReader("/home/geovanne/Documents/jtorrent/myTorrents"));
-
-            while(br.ready()){
-
-                if(nome.equals(br.readLine())) {
-                    linha = br.readLine();
-                    break;
-                }else {
-                    br.readLine();
-                }
+        try {
+            File f = new File("/home/geovanne/Documents/jtorrent/myTorrents");
+            RandomAccessFile file = new RandomAccessFile(f,"r");
+                        
+            while((linha = file.readLine()) != null) {
+            	if(nome.equals(linha)) {
+            		linha = file.readLine();
+            		break;
+            	}		
             }
-            br.close();
+            file.close();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println("Error Server::Class->findOrNullParts");
             e.printStackTrace();
         }
-
+      
         res = splitParts(linha);
 
         return res;
@@ -74,10 +71,8 @@ public class Server {
         ArrayList<Integer> res = new ArrayList<Integer>();
 
         if(!(str == null)){
-
             for (String s : str.split(",")) {
                res.add(Integer.parseInt(s));
-                System.out.println(Integer.parseInt(s));
             }
         }
 
