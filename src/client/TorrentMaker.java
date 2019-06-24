@@ -29,7 +29,7 @@ public class TorrentMaker {
 
 			while (file.read(buffer) != -1) {
 
-				String line = count.toString()+" "+buffer.hashCode()+"\n";
+				String line = count.toString()+" "+createHash(buffer)+"\n";
 
 				torrent.writeBytes(line);
 				
@@ -71,8 +71,6 @@ public class TorrentMaker {
 			MessageDigest algorithm = MessageDigest.getInstance("MD5");
 			messageDigest = algorithm.digest(bytes);
 
-			System.out.println(messageDigest);
-
 		} catch (Exception e) {
 
 		}
@@ -92,6 +90,6 @@ public class TorrentMaker {
 
 		split = name.split("\\.");
 
-		return split[0];
+		return split[0]+".torrent";
 	}
 }
