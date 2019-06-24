@@ -14,7 +14,7 @@ public class Client {
     private JJorgeClient jJorgeClient;
     private TorrentFile torrentFile;
     private ArrayList<Integer> avaliablePecas = null;
-    FileDownload fileDownload = null;
+    private FileDownload fileDownload = null;
     private int count = 0;
     private int range = 0;
 
@@ -48,7 +48,7 @@ public class Client {
 
         this.jJorgeClient.discoverMachines(obj);
 
-        this.fileDownload = new FileDownload(filePath);
+        this.fileDownload = new FileDownload("jTorrent - " + filePath);
         this.fileDownload.openToWrite();
     }
 
