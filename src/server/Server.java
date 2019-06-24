@@ -46,7 +46,7 @@ public class Server {
         String linha = null;
 
         try {
-            File f = new File("/home/brenno/Documentos/myTorrents");
+            File f = new File("/home/geovanne/Documents/jtorrent/myTorrents");
             RandomAccessFile file = new RandomAccessFile(f,"r");
                         
             while((linha = file.readLine()) != null) {

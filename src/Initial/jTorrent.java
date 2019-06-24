@@ -30,21 +30,21 @@ public class jTorrent {
 //    System.out.println(arquivo);
     
     try {
-//        JFileChooser abrirTorrent = new JFileChooser(); 
-//        abrirTorrent.showOpenDialog(null);
-//        File file = abrirTorrent.getSelectedFile();
+        JFileChooser abrirTorrent = new JFileChooser();
+        abrirTorrent.showOpenDialog(null);
+        File file = abrirTorrent.getSelectedFile();
 //        System.out.println("Arquivo selecionado: "+file.getPath());
-        
-        TorrentFile f = new TorrentFile("/home/brenno/Documentos/toyStory.torrent");
-        
-        ArrayList<Integer> parts = server.findOrNullParts(f.getNameTorrent());
+
+        TorrentFile f = new TorrentFile("/home/geovanne/Documents/jtorrent/torrent");
+
+        /*ArrayList<Integer> parts = server.findOrNullParts(f.getNameTorrent());
         
         for (Integer integer : parts) {
 			System.out.println(integer);
-		}
+		}*/
         
         //Passa o caminho do .torrent para o cliente
-        //client.searchMachines(file.getPath());
+        client.searchMachines(file.getPath());
 
     } 
     catch (Exception ex) {
