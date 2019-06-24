@@ -1,4 +1,4 @@
-package server;
+package common;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,10 +9,10 @@ public class FileDownload {
 	private RandomAccessFile file;
 	private String path;
 	
-	FileDownload(String path) {
+	public FileDownload(String path) {
 		this.path = path;
 	}
-	
+
 	public void openFile() {
 		try {
 			File f = new File(this.path);
@@ -22,6 +22,17 @@ public class FileDownload {
 			System.err.printf("Erro ao abrir arquivo a ser baixado: %s.\n",e.getMessage());
 		}
 	}
+
+	public void openToWrite() {
+		try {
+			File f = new File(this.path);
+			this.file = new RandomAccessFile(f,"rw");
+		}
+		catch(IOException e) {
+			System.err.printf("Erro ao abrir arquivo a ser escrito: %s.\n",e.getMessage());
+		}
+	}
+
 	
 	public void closeFile() {
 		try {			
@@ -79,6 +90,21 @@ public class FileDownload {
 		}
 		catch(IOException e) {
 			System.err.printf("Erro ao resetar ponteiro do arquivo que está sendo baixado baixado: %s.\n",e.getMessage());
+		}
+	}
+
+	public void write(int id, byte[] peca) {
+
+		try
+		{
+			if(this.file.getFD().valid()) {
+
+				setFilePointer(id);
+				this.file.write(peca);
+			}
+		}
+		catch(IOException e) {
+			System.err.printf("Erro ao escrever no arquivo: %s.\n",e.getMessage());
 		}
 	}
 }

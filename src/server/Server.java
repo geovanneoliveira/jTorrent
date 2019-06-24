@@ -1,18 +1,14 @@
 package server;
 
 
+import common.FileDownload;
 import common.ListenJJorge;
 import common.ListenerTorrent;
 import common.TransmissionObject;
 
-import java.awt.image.AreaAveragingScaleFilter;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class Server {
 
@@ -87,7 +83,7 @@ public class Server {
     }
 
     private void initFileDownload(String name) {
-    	String path = "/home/brenno/Documentos/"+name;
+    	String path = "/home/geovanne/Documents/jtorrent/"+name;
     	this.fileDownload = new FileDownload(path);
     }
     
