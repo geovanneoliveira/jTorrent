@@ -24,7 +24,7 @@ public class Analyze extends Thread{
     public void run() {
         Client client = Client.getInstance();
 
-        ArrayList<Integer> parts= client.avaliableParts(this.transmissionObject.getParts());
+        ArrayList<Integer> parts = client.avaliableParts(this.transmissionObject.getParts());
 
         if(parts != null){
             this.transmissionObject.setOperation(ListenerTorrent.TRANSMISSION);

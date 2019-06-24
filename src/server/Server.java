@@ -5,7 +5,12 @@ import common.ListenJJorge;
 import common.ListenerTorrent;
 import common.TransmissionObject;
 
+import java.awt.image.AreaAveragingScaleFilter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Server {
 
@@ -33,14 +38,50 @@ public class Server {
         jJorgeServer.send(obj);
     }
 
-    public ArrayList<Integer> findOrNullPecas(String nome) {
+    public ArrayList<Integer> findOrNullParts(String nome) {
 
         ArrayList<Integer> res = null;
+        String linha = null;
 
-        //Função para leitura do arquivo (o arquivo já pode estar aberto fora desse escopo)
-        //Se existir o arquivo pegue as pecas
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader("/home/geovanne/Documents/jtorrent/myTorrents"));
+
+            while(br.ready()){
+
+                if(nome.equals(br.readLine())) {
+                    linha = br.readLine();
+                    break;
+                }else {
+                    br.readLine();
+                }
+            }
+            br.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Server::Class->findOrNullParts");
+            e.printStackTrace();
+        }
+
+        res = splitParts(linha);
 
         return res;
+    }
+
+    private ArrayList<Integer> splitParts(String str)
+    {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        if(!(str == null)){
+
+            for (String s : str.split(",")) {
+               res.add(Integer.parseInt(s));
+                System.out.println(Integer.parseInt(s));
+            }
+        }
+
+        return (res.isEmpty()) ? null : res ;
     }
 
     public byte[] getPecaById(int idPeca) {

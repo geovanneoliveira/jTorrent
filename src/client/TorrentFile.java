@@ -36,6 +36,21 @@ public class TorrentFile {
 		return name;
 	}
 	
+	public int getTotal(){
+
+		int res = 0;
+
+		try {
+			this.torrentReader.seek(1);
+			res = Integer.parseInt(this.torrentReader.readLine());
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
 	public ArrayList<Integer> getAllPartsFromTorrent() {
 		
 		String line = null;

@@ -12,6 +12,8 @@ public class Client {
     private static Client instance;
     private JJorgeClient jJorgeClient;
     private TorrentFile torrentFile;
+    private ArrayList<Integer> avaliablePecas = null;
+    private int count = 0;
 
     public static synchronized Client getInstance() {
         return (instance == null) ? instance = new Client() : instance;
@@ -51,7 +53,7 @@ public class Client {
 
         TransmissionObject obj = new TransmissionObject();
         obj.setArchiveName(nome);
-        obj.setOperation('1');
+        obj.setOperation(ListenerTorrent.DISCOVER);
         return obj;
     }
 
@@ -71,8 +73,32 @@ public class Client {
        serverParts.containsAll(); <- vide os paramentros necessarios
        */
 
+       int total = torrentFile.getTotal();
+       initArrayAvaliablePecas(total);
+
+       int range = total / 100;
+       //FIXME TODO
+       for()
+       this.avaliablePecas.get(count);
+
+       serverParts.containsAll();
+
+
         return res;
     }
+
+    private void initArrayAvaliablePecas(int total) {
+
+        if(this.avaliablePecas == null) {
+
+            this.avaliablePecas = new ArrayList<Integer>();
+
+            for(int i = 0; i < total; i++) {
+                this.avaliablePecas.add(i);
+            }
+        }
+    }
+
 
     public boolean isPecaAuthentic(byte[] peca) {
 

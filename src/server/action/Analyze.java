@@ -24,7 +24,7 @@ public class Analyze extends Thread{
 
         Server server = Server.getInstance();
 
-        ArrayList<Integer> parts =  server.findOrNullPecas(this.transmissionObject.getArchiveName());
+        ArrayList<Integer> parts =  server.findOrNullParts(this.transmissionObject.getArchiveName());
 
         if(parts != null){
             this.transmissionObject.setOperation(ListenerTorrent.DISCOVER);
