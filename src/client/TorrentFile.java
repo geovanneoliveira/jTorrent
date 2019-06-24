@@ -40,37 +40,68 @@ public class TorrentFile {
 		
 		String line = null;
 		ArrayList<Integer> parts = new ArrayList<Integer>();
+		int count = 0;
 		
 		try {
 			this.torrentReader.seek(0);
 			
-			while(this.torrentReader.readLine() != null) {
+			while((line = this.torrentReader.readLine()) != null) {
 				
-				line = this.torrentReader.readLine();
-				
-				parts.add(this.getIdFromLine(line));
+				if(count > 1) {						
+					parts.add(this.getIdFromLine(line));
+				}
+				count++;
 			}
 		}
 		catch(IOException e) {
 			System.err.printf("Erro ao ler arquivo: %s.\n",e.getMessage());
+			return null;
 		}	
 		
 		return parts;
 	}
 	
-	private int getIdFromLine(String line) {
+	public String getHashById(int id) {
+		String line = this.findLineById(id);
+		return this.getHashFromLine(line);
+	}
+	
+	private String findLineById(int id) {
+		int count = 0;
+		String line = null;
 		
+		try {
+			this.torrentReader.seek(0);
+			
+			while((line = this.torrentReader.readLine()) != null) {
+				
+				if(count > 1) {						
+					if(this.getIdFromLine(line) == id)
+						return line;
+				}
+				count++;
+			}
+		}
+		catch(IOException e) {
+			System.err.printf("Erro ao ler arquivo: %s.\n",e.getMessage());
+			return null;
+		}
+		return null;
+	}
+	
+	private int getIdFromLine(String line) {
 		String split[] = new String[2];
 		
-		split = line.split(line, ' ');
+		split = line.split(" ");
 		
-		return Integer.parseInt(split[0]) ;
+		return Integer.parseInt(split[0]);
 	}
+	
 	
 	private String getHashFromLine(String line) {
 		String split[] = new String[2];
 		
-		split = line.split(line, ' ');
+		split = line.split(" ");
 		
 		return split[1];
 	}
