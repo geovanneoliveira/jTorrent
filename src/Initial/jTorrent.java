@@ -14,8 +14,8 @@ public class jTorrent {
   public static void main(String args[]){
 
     //Inicializando Operadores
-    
-    Server server = Server.getInstance();
+	  Client client = Client.getInstance();
+	  Server server = Server.getInstance();
 
     try {
     	userInterface();

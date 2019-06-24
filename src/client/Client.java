@@ -49,7 +49,7 @@ public class Client {
 
         this.jJorgeClient.discoverMachines(obj);
 
-        this.fileDownload = new FileDownload("jTorrent - " + filePath);
+        this.fileDownload = new FileDownload("/home/geovanne/Documents/jtorrent/j - " + name);
         this.fileDownload.openToWrite();
     }
 
