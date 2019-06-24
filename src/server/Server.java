@@ -19,6 +19,7 @@ public class Server {
     //Singleton
     private static Server instance;
     private JJorgeServer jJorgeServer;
+    private FileDownload fileDownload;
 
     public static synchronized Server getInstance(){
         return (instance == null)? instance = new Server() : instance;
@@ -39,7 +40,7 @@ public class Server {
         jJorgeServer.send(obj);
     }
 
-    public ArrayList<Integer> findOrNullParts(String nome) {
+    public ArrayList<Integer> findOrNullParts(String name) {
 
         ArrayList<Integer> res = null;
         String linha = null;
@@ -49,8 +50,9 @@ public class Server {
             RandomAccessFile file = new RandomAccessFile(f,"r");
                         
             while((linha = file.readLine()) != null) {
-            	if(nome.equals(linha)) {
+            	if(name.equals(linha)) {
             		linha = file.readLine();
+            		this.initFileDownload(name);
             		break;
             	}		
             }
@@ -65,6 +67,7 @@ public class Server {
 
         return res;
     }
+    
 
     private ArrayList<Integer> splitParts(String str)
     {
@@ -78,21 +81,21 @@ public class Server {
 
         return (res.isEmpty()) ? null : res ;
     }
-
-    public byte[] getPecaById(int idPeca) {
-
-        byte[] res = null;
-
-        //Função para leitura do arquivo (o arquivo já pode estar aberto fora desse escopo)
-        //e retornar a peca da posição.
-        //Dica. idPeca é o numero  ====> ex.: peça numero 3.
-        //Achar a posição sera 3 * default do tamanho do byte
-        //Criar uma const pra isso.
-        //e retornar.
-        //ps. Já que disse que tinha não é pra voltar Null, pois vai ficar faltando no cliente
-
-
-        return res;
+     
+    public byte[] getPecaById(int idPeca) {   
+        return this.fileDownload.getPecaById(idPeca);
     }
 
+    private void initFileDownload(String name) {
+    	String path = "/home/brenno/Documentos/"+name;
+    	this.fileDownload = new FileDownload(path);
+    }
+    
+    public void openFileDownload() {
+    	this.fileDownload.openFile();
+    }
+    
+    public void closeFileDownload() {
+    	this.fileDownload.closeFile();
+    }
 }

@@ -21,7 +21,9 @@ public class Process extends Thread{
         Server server = Server.getInstance();
 
         this.transmissionObject.setOperation(ListenerTorrent.TRANSMISSION);
-
+        
+        server.openFileDownload();
+        
         for(int idPeca : this.transmissionObject.getParts()){
 
             byte[] res = server.getPecaById(idPeca);
@@ -32,5 +34,7 @@ public class Process extends Thread{
                 server.send(this.transmissionObject);
             }
         }
+        
+        server.closeFileDownload();
     }
 }
