@@ -36,7 +36,6 @@ public class Server {
      * */
 
     public void send(TransmissionObject obj) {
-
         jJorgeServer.send(obj);
     }
 
@@ -55,7 +54,6 @@ public class Server {
             		break;
             	}		
             }
-
             file.close();
         }
         catch (Exception e) {
