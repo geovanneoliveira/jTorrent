@@ -67,11 +67,14 @@ public class jTorrent {
   	JFileChooser abrirTorrent = new JFileChooser(); 
     abrirTorrent.showOpenDialog(null);
     File file = abrirTorrent.getSelectedFile();
+    
     System.out.println("Arquivo selecionado para gerar torrent: "+file.getPath()+"\n");
     
     //int size = selectSizeOfPeca();  ta dando erro nessa função, resolver depois, n é urgente
-    System.out.println("tamanho do arquivo: "+file.length());
-    //TorrentMaker torrentMaker = new TorrentMaker(file.getPath());
+    
+    TorrentMaker torrentMaker = new TorrentMaker(file.getPath());
+    
+    torrentMaker.makeTorrent();
   }
   
 	public static int selectSizeOfPeca() {
