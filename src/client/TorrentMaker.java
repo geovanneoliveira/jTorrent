@@ -92,6 +92,6 @@ public class TorrentMaker {
 
 		split = name.split("\\.");
 
-		return split[0];
+		return split[0]+".torrent";
 	}
 }
