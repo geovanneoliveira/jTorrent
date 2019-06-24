@@ -3,9 +3,9 @@ package client;
 import common.ListenJJorge;
 import common.ListenerTorrent;
 import common.TransmissionObject;
+import common.FileDownload;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Client {
 
@@ -14,6 +14,7 @@ public class Client {
     private JJorgeClient jJorgeClient;
     private TorrentFile torrentFile;
     private ArrayList<Integer> avaliablePecas = null;
+    private FileDownload fileDownload = null;
     private int count = 0;
     private int range = 0;
 
@@ -46,6 +47,9 @@ public class Client {
         TransmissionObject obj = arquivoParaObjeto(name);
 
         this.jJorgeClient.discoverMachines(obj);
+
+        this.fileDownload = new FileDownload("jTorrent - " + filePath);
+        this.fileDownload.openToWrite();
     }
 
 
@@ -117,10 +121,7 @@ public class Client {
 
     public void writeInDisk(int idPeca, byte[] peca) {
 
-        //Função para leitura do arquivo (o arquivo já pode estar aberto fora desse escopo)
-        //gravar vai precisar do (id * byte) = posição
-        //e write no arquivo (feito já tinhamos feito um exemplo)
-
+        this.fileDownload.write(idPeca,peca);
     }
 
 }
