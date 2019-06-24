@@ -5,6 +5,7 @@ import common.ListenerTorrent;
 import common.TransmissionObject;
 import common.FileDownload;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 
 public class Client {

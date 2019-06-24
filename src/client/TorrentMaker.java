@@ -1,6 +1,7 @@
 package client;
 
 import java.io.File;
+import java.security.MessageDigest;
 import java.io.RandomAccessFile;
 
 public class TorrentMaker {
@@ -60,6 +61,24 @@ public class TorrentMaker {
 			return result.toString() + "\n";
 		}
 	}
+
+
+	public byte[] createHash(byte[] bytes) {
+
+		byte messageDigest[] = null;
+
+		try {
+			MessageDigest algorithm = MessageDigest.getInstance("MD5");
+			messageDigest = algorithm.digest(bytes);
+
+			System.out.println(messageDigest);
+
+		} catch (Exception e) {
+
+		}
+		return messageDigest;
+	}
+	
 
 	private String getNameWithoutExtension() {
 		return this.file.getName().split("\\.")[0] + "\n";
