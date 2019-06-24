@@ -22,40 +22,86 @@ public class jTorrent {
     Client client = Client.getInstance();
     Server server = Server.getInstance();
 
-
-    //Essa deve ser a entrada de uma arquivo .torrent
-//    Scanner leitor = new Scanner(System.in);
-//    System.out.print("Digite uma String: ");
-//    String arquivo = leitor.nextLine();
-//    System.out.println(arquivo);
-    
     try {
-        JFileChooser abrirTorrent = new JFileChooser();
-        abrirTorrent.showOpenDialog(null);
-        File file = abrirTorrent.getSelectedFile();
-//        System.out.println("Arquivo selecionado: "+file.getPath());
-
-        TorrentFile f = new TorrentFile("/home/geovanne/Documents/jtorrent/torrent");
-
-        /*ArrayList<Integer> parts = server.findOrNullParts(f.getNameTorrent());
-        
-        for (Integer integer : parts) {
-			System.out.println(integer);
-		}*/
-        
-        //Passa o caminho do .torrent para o cliente
-        client.searchMachines(file.getPath());
-
+    	userInterface();
     } 
     catch (Exception ex) {
         ex.printStackTrace();
         System.out.println(ex.getMessage());
     }
-
-
-    
-
   }
+  
+  public static void userInterface() {
+	  
+	    Scanner scan = new Scanner(System.in);
+	    
+	    System.out.print("1 - Baixar arquivo\n");
+	    System.out.print("2 - Gerar arquivo .torrent\n");
+	    
+	    try {
+	    	int option = scan.nextInt();
+	    	scan.close();
+	    	switch (option) {
+			case 1:
+				downloadTorrent();
+				break;
+			case 2:
+				makeTorrent();
+				break;	
+			default:
+				throw new Exception("opção escolhida inválida");
+			}
+	    }
+	    catch(Exception e) {
+	    	System.out.println(e.getMessage());
+	    }  
+	  }
+  
+  public static void downloadTorrent() {
+    JFileChooser abrirTorrent = new JFileChooser(); 
+    abrirTorrent.showOpenDialog(null);
+    File file = abrirTorrent.getSelectedFile();
+    System.out.println("Arquivo selecionado para download: "+file.getPath());
+  }
+  
+  public static void makeTorrent() {
+  	JFileChooser abrirTorrent = new JFileChooser(); 
+    abrirTorrent.showOpenDialog(null);
+    File file = abrirTorrent.getSelectedFile();
+    System.out.println("Arquivo selecionado para gerar torrent: "+file.getPath()+"\n");
+    
+    //int size = selectSizeOfPeca();  ta dando erro nessa função, resolver depois, n é urgente
+    
+    
+  }
+  
+	public static int selectSizeOfPeca() {
+		System.out.println("Selecione o tamanho das peças do arquivo:\n");
+		System.out.println("1 - 256kb\n2 - 512kb\n3 - 1mb\n");
+
+		Scanner scanner = new Scanner(System.in);
+		
+		int size = 0;
+		int option = scanner.nextInt();
+		
+		try {
+			switch (option) {
+			case 1:
+				size =  256;
+			case 2:
+				size =  512;
+			case 3:
+				size =  1024;
+			default:
+				throw new Exception("Opção digitada inválida");
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return size;
+	}
 
 
 }
