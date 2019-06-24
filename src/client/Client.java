@@ -76,12 +76,12 @@ public class Client {
        int total = torrentFile.getTotal();
        initArrayAvaliablePecas(total);
 
-       int range = total / 100;
-       //FIXME TODO
-       for()
-       this.avaliablePecas.get(count);
-
-       serverParts.containsAll();
+//       int range = total / 100;
+//       //FIXME TODO
+//       for();
+//       this.avaliablePecas.get(count);
+//
+//       serverParts.containsAll();
 
 
         return res;

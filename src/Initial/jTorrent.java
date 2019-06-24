@@ -19,8 +19,8 @@ public class jTorrent {
   public static void main(String args[]){
 
     //Inicializando Operadores
-//    Client client = Client.getInstance();
-//    Server server = Server.getInstance();
+    Client client = Client.getInstance();
+    Server server = Server.getInstance();
 
 
     //Essa deve ser a entrada de uma arquivo .torrent
@@ -30,16 +30,18 @@ public class jTorrent {
 //    System.out.println(arquivo);
     
     try {
-//        JFileChooser abrirTorrent = new JFileChooser();
+//        JFileChooser abrirTorrent = new JFileChooser(); 
 //        abrirTorrent.showOpenDialog(null);
-//        
 //        File file = abrirTorrent.getSelectedFile();
-//        
 //        System.out.println("Arquivo selecionado: "+file.getPath());
         
         TorrentFile f = new TorrentFile("/home/brenno/Documentos/vingadores.torrent");
         
-        System.out.println(f.getHashById(7));
+        ArrayList<Integer> parts = server.findOrNullParts(f.getNameTorrent());
+        
+        for (Integer integer : parts) {
+			System.out.println(integer);
+		}
         
         //Passa o caminho do .torrent para o cliente
         //client.searchMachines(file.getPath());

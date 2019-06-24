@@ -45,7 +45,7 @@ public class Server {
 
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("/home/geovanne/Documents/jtorrent/myTorrents"));
+            BufferedReader br = new BufferedReader(new FileReader("/home/brenno/Documentos/myTorrents"));
 
             while(br.ready()){
 
