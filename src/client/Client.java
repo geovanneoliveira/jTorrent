@@ -15,6 +15,7 @@ public class Client {
     private TorrentFile torrentFile;
     private ArrayList<Integer> avaliablePecas = null;
     private int count = 0;
+    private int range = 0;
 
     public static synchronized Client getInstance() {
         return (instance == null) ? instance = new Client() : instance;
@@ -58,43 +59,37 @@ public class Client {
         return obj;
     }
 
-    public ArrayList<Integer> avaliableParts(ArrayList<Integer> serverParts) {
+    public synchronized ArrayList<Integer> avaliableParts(ArrayList<Integer> serverParts) {
 
         ArrayList<Integer> res = null;
 
-        //Consultar em um array na memoria [array com Syncronized](que sera uma fog do arquivo com as partes)
-        //procurar um bloco de pecas que esteja disponivel e o serverParts contenha
+        try
+        {
+            ArrayList<Integer> collection = new ArrayList<>();
 
-       /* Exemplo a usar
+            int total = torrentFile.getTotal();
+            range = (range == 0) ? (total / 100) : range ;
+            initArrayAvaliablePecas(total);
 
-       serverParts.contains(1);
+            for(int i = 0; i < range; i++) {
 
-       ou
+                collection.add(this.avaliablePecas.get(i));
+            }
 
-       serverParts.containsAll(); <- vide os paramentros necessarios
-       */
+            if(serverParts.containsAll(collection)) {
+                res = collection;
+                this.avaliablePecas.removeAll(res);
+            }
 
-        int total = torrentFile.getTotal();
-        initArrayAvaliablePecas(total);
+            count += range;
 
-        int range = total / 100;
-        System.out.println(total);
-        ArrayList<Integer> collection = new ArrayList<>();
-
-        for(int i = (count * range); i < (range + range); i++) {
-
-           collection.add(this.avaliablePecas.get(i));
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error Client::class->avaliableParts");
         }
 
-       if(serverParts.containsAll(collection)) {
-
-           for (int i : collection) {
-               System.out.println(">>: " + i);
-           }
-       }
-
-
-        return res;
+       return res;
     }
 
     private void initArrayAvaliablePecas(int total) {
