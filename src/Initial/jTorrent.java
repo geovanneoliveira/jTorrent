@@ -29,7 +29,10 @@ public class jTorrent {
   public static void userInterface() {
 	  
 	    Scanner scan = new Scanner(System.in);
-	    
+	    /*for(int i = 0; i <= 10653; i++) {
+			System.out.print(i + ",");
+		}*/
+
 	    System.out.print("1 - Baixar arquivo\n");
 	    System.out.print("2 - Gerar arquivo .torrent\n");
 	    
