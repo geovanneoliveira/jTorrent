@@ -22,6 +22,10 @@ public class TorrentMaker {
 			
 			File t = new File("/home/brenno/Documentos/myTorrents");
 			RandomAccessFile myTorrents = new RandomAccessFile(t, "rw");
+			
+			File i = new File("/home/brenno/Documentos/"+getNameWithoutExtension()+".info");
+			RandomAccessFile info = new RandomAccessFile(i, "rw");
+			
 
 			torrent.writeBytes(this.file.getName()+"\n");
 			Integer size = (int) this.file.length();
@@ -31,7 +35,6 @@ public class TorrentMaker {
 			myTorrents.seek(myTorrents.length());
 			myTorrents.writeBytes(this.file.getName()+"\n");
 			
-			String parts = "";
 			byte buffer[] = new byte[256];
 			Integer count = 0;
 			int seek = 256;
@@ -40,7 +43,7 @@ public class TorrentMaker {
 
 				String line = count.toString()+" "+createHash(buffer)+"\n";
 				
-				parts += count.toString()+","; 
+				info.writeBytes(count.toString()+"\n");; 
 				
 				torrent.writeBytes(line);
 				
@@ -51,10 +54,7 @@ public class TorrentMaker {
 				file.seek(seek * count);
 			}
 			
-			parts += "\n";
-			
-			myTorrents.writeBytes(parts);
-			
+			info.close();
 			myTorrents.close();
 			file.close();
 			torrent.close();
@@ -63,6 +63,10 @@ public class TorrentMaker {
 			System.out.println("Erro ao gerar arquivo .torrent: " + e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	private String getNameWithoutExtension() {
+		return this.file.getName().split("\\.")[0];
 	}
 
 	private String getNumberOfPecas(int size) {

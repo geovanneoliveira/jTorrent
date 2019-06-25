@@ -1,18 +1,10 @@
 package Initial;
 
 import client.Client;
-import client.TorrentFile;
 import client.TorrentMaker;
 import server.Server;
-
 import java.io.File;
-import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
-
 import javax.swing.JFileChooser;
 
 public class jTorrent {
@@ -35,9 +27,6 @@ public class jTorrent {
   public static void userInterface() {
 	  
 	    Scanner scan = new Scanner(System.in);
-	    /*for(int i = 0; i <= 10653; i++) {
-			System.out.print(i + ",");
-		}*/
 
 	    System.out.print("1 - Baixar arquivo\n");
 	    System.out.print("2 - Gerar arquivo .torrent\n");
