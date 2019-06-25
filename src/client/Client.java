@@ -16,8 +16,8 @@ public class Client {
     private TorrentFile torrentFile;
     private ArrayList<Integer> avaliablePecas = null;
     private FileDownload fileDownload = null;
-    private int count = 0;
     private int range = 0;
+    private String str;
 
     public static synchronized Client getInstance() {
         return (instance == null) ? instance = new Client() : instance;
@@ -40,6 +40,8 @@ public class Client {
     }
 
     public void searchMachines(String filePath) {
+
+        this.str = filePath;
     	
     	this.torrentFile = new TorrentFile(filePath);
     	
@@ -49,7 +51,7 @@ public class Client {
 
         this.jJorgeClient.discoverMachines(obj);
 
-        this.fileDownload = new FileDownload("jTorrent - " + filePath);
+        this.fileDownload = new FileDownload("/home/geovanne/Documents/jtorrent/j - " + name);
         this.fileDownload.openToWrite();
     }
 
@@ -73,7 +75,8 @@ public class Client {
             ArrayList<Integer> collection = new ArrayList<>();
 
             int total = torrentFile.getTotal();
-            range = (range == 0) ? (total / 100) : range ;
+            range = 1 ;
+
             initArrayAvaliablePecas(total);
 
             for(int i = 0; i < range; i++) {
@@ -85,8 +88,6 @@ public class Client {
                 res = collection;
                 this.avaliablePecas.removeAll(res);
             }
-
-            count += range;
 
         }
         catch (Exception e)
@@ -120,9 +121,20 @@ public class Client {
         return true;
     }
 
-    public void writeInDisk(int idPeca, byte[] peca) {
+    public synchronized void writeInDisk(int idPeca, byte[] peca) {
+
+        if(this.avaliablePecas.size() == 0) {
+
+            int rest = this.torrentFile.getSizeOfFile() % 256;
+
+            byte[] a = new byte[rest];
+
+            peca = a;
+        }
 
         this.fileDownload.write(idPeca,peca);
+
+        searchMachines(this.str);
     }
 
 }

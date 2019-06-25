@@ -15,7 +15,7 @@ public class TorrentMaker {
 	public void makeTorrent() {
 
 		try {
-			File f = new File("/home/brenno/Documentos/" + getNameOnTorrentFormat());
+			File f = new File("/home/geovanne/Documents/jtorrent/" + getNameOnTorrentFormat());
 			RandomAccessFile torrent = new RandomAccessFile(f, "rw");
 
 			RandomAccessFile file = new RandomAccessFile(this.file, "r");
