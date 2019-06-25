@@ -15,12 +15,12 @@ public class TorrentMaker {
 	public void makeTorrent() {
 
 		try {
-			File f = new File("/home/brenno/Documentos/" + getNameOnTorrentFormat());
+			File f = new File("/home/geovanne/Documents/jtorrent/" + getNameOnTorrentFormat());
 			RandomAccessFile torrent = new RandomAccessFile(f, "rw");
 
 			RandomAccessFile file = new RandomAccessFile(this.file, "r");
 			
-			File t = new File("/home/brenno/Documentos/myTorrents");
+			File t = new File("/home/geovanne/Documents/jtorrent/myTorrents");
 			RandomAccessFile myTorrents = new RandomAccessFile(t, "rw");
 
 			torrent.writeBytes(this.file.getName()+"\n");
