@@ -50,7 +50,7 @@ public class Server {
             		linha = file.readLine();
             		this.initFileDownload(name);
             		break;
-            	}		
+            	}
             }
             file.close();
         }

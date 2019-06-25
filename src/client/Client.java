@@ -125,11 +125,11 @@ public class Client {
 
         if(this.avaliablePecas.size() == 0) {
 
-            int rest = this.torrentFile.getSizeOfFile() % 256;
-
-            byte[] a = new byte[rest];
-
-            peca = a;
+//            int rest = this.torrentFile.getSizeOfFile() % 256;
+//
+//            byte[] a = new byte[rest];
+//
+//            peca = a;
         }
 
         this.fileDownload.write(idPeca,peca);

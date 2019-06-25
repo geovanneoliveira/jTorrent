@@ -19,10 +19,15 @@ public class TorrentMaker {
 			RandomAccessFile torrent = new RandomAccessFile(f, "rw");
 
 			RandomAccessFile file = new RandomAccessFile(this.file, "r");
+			
+			File t = new File("/home/geovanne/Documents/jtorrent/myTorrents");
+			RandomAccessFile myTorrents = new RandomAccessFile(t, "rw");
 
 			torrent.writeBytes(getNameWithoutExtension());
 			torrent.writeBytes(getNumberOfPecas(256));
+			myTorrents.writeBytes(getNameWithoutExtension());
 			
+			String parts = "";
 			byte buffer[] = new byte[256];
 			Integer count = 0;
 			int seek = 256;
@@ -30,7 +35,9 @@ public class TorrentMaker {
 			while (file.read(buffer) != -1) {
 
 				String line = count.toString()+" "+createHash(buffer)+"\n";
-
+				
+				parts += count.toString()+","; 
+				
 				torrent.writeBytes(line);
 				
 				count++;
@@ -40,6 +47,11 @@ public class TorrentMaker {
 				file.seek(seek * count);
 			}
 			
+			parts += "\n";
+			
+			myTorrents.writeBytes(parts);
+			
+			myTorrents.close();
 			file.close();
 			torrent.close();
 
