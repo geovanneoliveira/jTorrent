@@ -38,45 +38,49 @@ public class Server {
 
     public ArrayList<Integer> findOrNullParts(String name) {
 
-        ArrayList<Integer> res = null;
+        ArrayList<Integer> res = new ArrayList<Integer>();
         String linha = null;
 
         try {
-            File f = new File("/home/geovanne/Documents/jtorrent/myTorrents");
-            RandomAccessFile file = new RandomAccessFile(f,"r");
-                        
-            while((linha = file.readLine()) != null) {
-            	if(name.equals(linha)) {
-            		linha = file.readLine();
-            		this.initFileDownload(name);
-            		break;
+        	
+        	String nameInfo = name.split("\\.")[0]+".info";
+        	
+            File f = new File("/home/brenno/Documentos/"+nameInfo);
+                     
+            if(f.exists()) {
+            	RandomAccessFile file = new RandomAccessFile(f,"r");
+            	
+            	this.initFileDownload(name);
+            	
+            	while((linha = file.readLine()) != null) {
+            		linha.replace("\n","");
+            		res.add(Integer.parseInt(linha));
             	}
+            	file.close();
             }
-            file.close();
+ 
         }
         catch (Exception e) {
             System.out.println("Error Server::Class->findOrNullParts");
             e.printStackTrace();
         }
-      
-        res = splitParts(linha);
 
         return res;
     }
     
 
-    private ArrayList<Integer> splitParts(String str)
-    {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-
-        if(!(str == null)){
-            for (String s : str.split(",")) {
-               res.add(Integer.parseInt(s));
-            }
-        }
-
-        return (res.isEmpty()) ? null : res ;
-    }
+//    private ArrayList<Integer> splitParts(String str)
+//    {
+//        ArrayList<Integer> res = new ArrayList<Integer>();
+//
+//        if(!(str == null)){
+//            for (String s : str.split(",")) {
+//               res.add(Integer.parseInt(s));
+//            }
+//        }
+//
+//        return (res.isEmpty()) ? null : res ;
+//    }
      
     public byte[] getPecaById(int idPeca) {   
         return this.fileDownload.getPecaById(idPeca);

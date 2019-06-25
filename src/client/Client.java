@@ -5,6 +5,8 @@ import common.ListenerTorrent;
 import common.TransmissionObject;
 import common.FileDownload;
 
+import java.io.File;
+import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 
@@ -133,8 +135,28 @@ public class Client {
         }
 
         this.fileDownload.write(idPeca,peca);
-
+        
+        updateInfoFile(idPeca);
+        
         searchMachines(this.str);
+    }
+    
+    public void updateInfoFile(int idPeca) {
+    	try {
+    		File i = new File("/home/brenno/Documentos/"+this.fileDownload.getNameWithoutExtension()+".info");
+    		RandomAccessFile info = new RandomAccessFile(i, "rw");
+    		
+    		info.seek(info.length());
+    		
+    		Integer id = idPeca;
+    		
+    		info.writeBytes(id.toString()+"\n");
+    	}
+    	catch(Exception e) {
+    		System.out.println("Erro ao atualizar arquivo .info");
+    		System.out.println(e.getMessage());
+    	}
+    	
     }
 
 }
