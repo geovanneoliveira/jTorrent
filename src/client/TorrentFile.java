@@ -81,7 +81,7 @@ public class TorrentFile {
 			
 			while((line = this.torrentReader.readLine()) != null) {
 				
-				if(count > 1) {						
+				if(count > 2) {						
 					parts.add(this.getIdFromLine(line));
 				}
 				count++;

@@ -26,6 +26,7 @@ public class jTorrent {
     	System.out.println(t.getNameTorrent());
     	System.out.println(t.getNumberOfPecas());
     	System.out.println(t.getSizeOfFile());
+    	System.out.println(t.getAllPartsFromTorrent());
     } 
     catch (Exception ex) {
         ex.printStackTrace();
