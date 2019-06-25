@@ -21,7 +21,7 @@ public class Server {
         return (instance == null)? instance = new Server() : instance;
     }
 
-    private Server() {
+    private Server() { 
         ListenJJorge listenJJorge = ListenerTorrent.getInstance();
         this.jJorgeServer = new JJorgeServer(listenJJorge);
     }

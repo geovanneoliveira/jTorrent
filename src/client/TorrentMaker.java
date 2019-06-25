@@ -21,7 +21,7 @@ public class TorrentMaker {
 			RandomAccessFile file = new RandomAccessFile(this.file, "r");
 
 			torrent.writeBytes(getNameWithoutExtension());
-			torrent.writeBytes(getNumberOfPeças(256));
+			torrent.writeBytes(getNumberOfPecas(256));
 			
 			byte buffer[] = new byte[256];
 			Integer count = 0;
@@ -49,7 +49,7 @@ public class TorrentMaker {
 		}
 	}
 
-	private String getNumberOfPeças(int size) {
+	private String getNumberOfPecas(int size) {
 		int bytes = (int) this.file.length();
 
 		if ((bytes % size) == 0) {
