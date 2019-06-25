@@ -8,19 +8,40 @@ public class FileDownload {
 	
 	private RandomAccessFile file;
 	private String path;
+	private String name;
+	private String nameWithoutExtension;
 	
 	public FileDownload(String path) {
 		this.path = path;
 	}
-
+	
 	public void openFile() {
 		try {
 			File f = new File(this.path);
 			this.file = new RandomAccessFile(f,"r");
+			
+			setName(f.getName());
+			setNameWithoutExtension(f.getName());
 		}
 		catch(IOException e) {
 			System.err.printf("Erro ao abrir arquivo a ser baixado: %s.\n",e.getMessage());
 		}
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setNameWithoutExtension(String name) {
+		this.nameWithoutExtension = name.split("\\.")[0];
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getNameWithoutExtension() {
+		return this.nameWithoutExtension;
 	}
 
 	public void openToWrite() {

@@ -4,6 +4,7 @@ import client.Client;
 import client.TorrentMaker;
 import server.Server;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 
@@ -16,7 +17,9 @@ public class jTorrent {
 	  Server server = Server.getInstance();
 
     try {
+    	
     	userInterface();
+    	
     } 
     catch (Exception ex) {
         ex.printStackTrace();
