@@ -1,6 +1,7 @@
 package Initial;
 
 import client.Client;
+import client.TorrentFile;
 import client.TorrentMaker;
 import server.Server;
 
@@ -18,7 +19,13 @@ public class jTorrent {
 	  Server server = Server.getInstance();
 
     try {
-    	userInterface();
+    	//userInterface();
+    	
+    	TorrentFile t = new TorrentFile("/home/brenno/Documentos/imagem.torrent");
+    	
+    	System.out.println(t.getNameTorrent());
+    	System.out.println(t.getNumberOfPecas());
+    	System.out.println(t.getSizeOfFile());
     } 
     catch (Exception ex) {
         ex.printStackTrace();

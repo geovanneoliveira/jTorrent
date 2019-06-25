@@ -24,6 +24,8 @@ public class TorrentMaker {
 			RandomAccessFile myTorrents = new RandomAccessFile(t, "rw");
 
 			torrent.writeBytes(this.file.getName()+"\n");
+			Integer size = (int) this.file.length();
+			torrent.writeBytes(size.toString()+"\n");
 			torrent.writeBytes(getNumberOfPecas(256));
 			
 			myTorrents.seek(myTorrents.length());

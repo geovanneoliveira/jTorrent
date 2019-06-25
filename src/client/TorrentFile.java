@@ -36,7 +36,24 @@ public class TorrentFile {
 		return name;
 	}
 	
-	public int getTotal(){
+	public int getNumberOfPecas(){
+
+		int res = 0;
+
+		try {
+			this.torrentReader.seek(0);
+			this.torrentReader.readLine();
+			this.torrentReader.readLine();
+			res = Integer.parseInt(this.torrentReader.readLine());
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
+	public int getSizeOfFile(){
 
 		int res = 0;
 
@@ -52,6 +69,7 @@ public class TorrentFile {
 		return res;
 	}
 	
+
 	public ArrayList<Integer> getAllPartsFromTorrent() {
 		
 		String line = null;
