@@ -6,6 +6,11 @@ import client.TorrentMaker;
 import server.Server;
 
 import java.io.File;
+import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -19,14 +24,7 @@ public class jTorrent {
 	  Server server = Server.getInstance();
 
     try {
-    	//userInterface();
-    	
-    	TorrentFile t = new TorrentFile("/home/brenno/Documentos/imagem.torrent");
-    	
-    	System.out.println(t.getNameTorrent());
-    	System.out.println(t.getNumberOfPecas());
-    	System.out.println(t.getSizeOfFile());
-    	System.out.println(t.getAllPartsFromTorrent());
+    	userInterface();
     } 
     catch (Exception ex) {
         ex.printStackTrace();
