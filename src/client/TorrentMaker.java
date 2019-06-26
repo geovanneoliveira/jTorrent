@@ -23,7 +23,7 @@ public class TorrentMaker {
 			File t = new File("/home/geovanne/Documents/jtorrent/myTorrents");
 			RandomAccessFile myTorrents = new RandomAccessFile(t, "rw");
 			
-			File i = new File("/home/brenno/Documentos/"+getNameWithoutExtension()+".info");
+			File i = new File("/home/geovanne/Documents/jtorrent/"+getNameWithoutExtension()+".info");
 			RandomAccessFile info = new RandomAccessFile(i, "rw");
 			
 

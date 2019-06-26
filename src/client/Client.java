@@ -55,6 +55,7 @@ public class Client {
 
         this.fileDownload = new FileDownload("/home/geovanne/Documents/jtorrent/j - " + name);
         this.fileDownload.openToWrite();
+        this.fileDownload.setNameWithoutExtension(name);
     }
 
 
@@ -143,7 +144,7 @@ public class Client {
     
     public void updateInfoFile(int idPeca) {
     	try {
-    		File i = new File("/home/brenno/Documentos/"+this.fileDownload.getNameWithoutExtension()+".info");
+    		File i = new File("/home/geovanne/Documents/jtorrent/a/"+this.fileDownload.getNameWithoutExtension()+".info");
     		RandomAccessFile info = new RandomAccessFile(i, "rw");
     		
     		info.seek(info.length());

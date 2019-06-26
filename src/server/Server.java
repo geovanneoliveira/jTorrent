@@ -45,7 +45,7 @@ public class Server {
         	
         	String nameInfo = name.split("\\.")[0]+".info";
         	
-            File f = new File("/home/brenno/Documentos/"+nameInfo);
+            File f = new File("/home/geovanne/Documents/jtorrent/"+nameInfo);
                      
             if(f.exists()) {
             	RandomAccessFile file = new RandomAccessFile(f,"r");

@@ -19,7 +19,7 @@ public class FileDownload {
 		try {
 			File f = new File(this.path);
 			this.file = new RandomAccessFile(f,"r");
-			
+
 			setName(f.getName());
 			setNameWithoutExtension(f.getName());
 		}
@@ -48,6 +48,7 @@ public class FileDownload {
 		try {
 			File f = new File(this.path);
 			this.file = new RandomAccessFile(f,"rw");
+
 		}
 		catch(IOException e) {
 			System.err.printf("Erro ao abrir arquivo a ser escrito: %s.\n",e.getMessage());
